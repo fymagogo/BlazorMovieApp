@@ -4,6 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using BlazorMovieApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 builder.Services.AddDbContextFactory<BlazorMovieAppContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("BlazorMovieAppDb") ?? throw new InvalidOperationException("Connection string 'BlazorMovieAppDb' not found.")));
 
